@@ -1,0 +1,5 @@
+[*.lua]
+indent_style = space
+indent_size = 2
+max_line_lenght = 80
+trim_trailing_whitespace = true
