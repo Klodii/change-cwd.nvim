@@ -7,12 +7,15 @@ local action_state = require('telescope.actions.state')
 local M = {}
 
 local options = {
-  root_dir = '~'
+  root_dir = '~',
+  explorer = 'Oil'
 }
 
 M.setup = function(opts)
   opts = opts or {}
   opts.root_dir = opts.root_dir or '~'
+  -- opts.explorer = opts.explorer or 'Explorer'
+  opts.explorer = opts.explorer or 'Explorer'
   options = opts
 end
 
@@ -48,7 +51,9 @@ end
 --- Change the working directory
 --- @param dir: string new working directory
 local change_working_directory = function(selected_item)
-  vim.notify("You selected: " .. selected_item, vim.log.levels.INFO)
+  vim.api.nvim_command('cd ' .. selected_item)
+  vim.api.nvim_command(options.explorer)
+  vim.notify("Changed working directory to: " .. selected_item, vim.log.levels.INFO)
 end
 
 --- Select the new working directory
@@ -60,9 +65,8 @@ M.ask_new_directory = function()
     vim.notify("Command failed with error: " .. dir_options, vim.log.levels.ERROR)
     return
   end
-  print(dir_options)
 
-  select_directory({ 'dir1', 'dir2' }, change_working_directory)
+  select_directory({ '~/.config/nvim', '~/playground/nvim-plugins/change-cwd.nvim' }, change_working_directory)
 end
 
 
