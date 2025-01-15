@@ -62,7 +62,8 @@ end
 --- Change the working directory
 --- @param dir_path string path of the new working directory
 local _change_working_directory = function(dir_path)
-  vim.api.nvim_command('cd ' .. dir_path)
+  vim.api.nvim_command('cd ' .. dir_path) -- change working directory
+  vim.api.nvim_command('e ' .. dir_path)  -- move to Explorer
   vim.notify("Changed working directory to: " .. dir_path, vim.log.levels.INFO)
 end
 
